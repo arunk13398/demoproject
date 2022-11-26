@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sms_autofill/sms_autofill.dart';
+
+import '../HomeScreen/homeScreen_buyer.dart';
 //import 'package:sms_autofill/sms_autofill.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -11,12 +14,16 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  initState() {
+    super.initState();
+  }
   bool isLoading=true;
   @override
   Widget build(BuildContext context) {
+    checkOtp(context);
     return  Scaffold(
       resizeToAvoidBottomInset: false,
-      body:!isLoading? Column(
+      body:Column(
         children: <Widget>[
           const Spacer(flex: 1),
           Column(
@@ -50,7 +57,7 @@ class _OtpScreenState extends State<OtpScreen> {
               Padding(
                 padding: EdgeInsets.only(top: 16.0,bottom: 00),
                 child: Image(
-                  image: AssetImage('assets/Image/otp-icon.png'),
+                  image: AssetImage('assets/otp-icon.png'),
                   height: 150.0,
                   width: 150.0,),
               )
@@ -60,29 +67,34 @@ class _OtpScreenState extends State<OtpScreen> {
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              // child: PinFieldAutoFill(
-              //   codeLength: 6,
-              //   focusNode: FocusNode(),
-              //   keyboardType: TextInputType.number,
-              //   autoFocus: true,
-              //   currentCode: "",
-              //   decoration: const BoxLooseDecoration(
-              //       textStyle: TextStyle(color: Colors.black),
-              //       radius: Radius.circular(5),
-              //       strokeColorBuilder: FixedColorBuilder(Colors.greenAccent)),
-              //   onCodeChanged: (pin) {
-              //     if (pin!.length == 6) {
-              //     }
-              //   },
-              // ),
+              child: PinFieldAutoFill(
+                codeLength: 6,
+                focusNode: FocusNode(),
+                keyboardType: TextInputType.number,
+                autoFocus: true,
+                currentCode: "123456",
+                decoration: const BoxLooseDecoration(
+                    textStyle: TextStyle(color: Colors.black),
+                    radius: Radius.circular(5),
+                    strokeColorBuilder: FixedColorBuilder(Colors.greenAccent)),
+                onCodeChanged: (pin) {
+                  if (pin!.length == 6) {
+                  }
+                },
+              ),
             ),
           ),
           const Spacer(flex: 5),
         ],
-      ):const Center(
-        child: CircularProgressIndicator(),
       ),
 
     );
+
+  }
+  checkOtp(BuildContext context)async{
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const HomeScreenBuyer()));
+    });
   }
 }
