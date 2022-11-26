@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sms_autofill/sms_autofill.dart';
+//import 'package:sms_autofill/sms_autofill.dart';
 
 import '../HomeScreen/homeScreen_buyer.dart';
 //import 'package:sms_autofill/sms_autofill.dart';
@@ -67,21 +67,21 @@ class _OtpScreenState extends State<OtpScreen> {
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: PinFieldAutoFill(
-                codeLength: 6,
-                focusNode: FocusNode(),
-                keyboardType: TextInputType.number,
-                autoFocus: true,
-                currentCode: "123456",
-                decoration: const BoxLooseDecoration(
-                    textStyle: TextStyle(color: Colors.black),
-                    radius: Radius.circular(5),
-                    strokeColorBuilder: FixedColorBuilder(Colors.greenAccent)),
-                onCodeChanged: (pin) {
-                  if (pin!.length == 6) {
-                  }
-                },
-              ),
+              // child: PinFieldAutoFill(
+              //   codeLength: 6,
+              //   focusNode: FocusNode(),
+              //   keyboardType: TextInputType.number,
+              //   autoFocus: true,
+              //   currentCode: "123456",
+              //   decoration: const BoxLooseDecoration(
+              //       textStyle: TextStyle(color: Colors.black),
+              //       radius: Radius.circular(5),
+              //       strokeColorBuilder: FixedColorBuilder(Colors.greenAccent)),
+              //   onCodeChanged: (pin) {
+              //     if (pin!.length == 6) {
+              //     }
+              //   },
+              // ),
             ),
           ),
           const Spacer(flex: 5),
