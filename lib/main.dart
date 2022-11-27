@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Screens/HomeScreen/homescreen_seller.dart';
-import 'Screens/splash_screen.dart';
+import 'Screens/HomeScreen/homeScreen_buyer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreenSeller(),
+      home: const HomeScreenBuyer(),
     );
   }
 }
