@@ -55,6 +55,11 @@ flutter:
   assets:
     - assets/
     - assets/phone1.png
+    - assets/employe.png
+    - assets/bell.png
+    - assets/chats.png
+    - assets/product.png
+    - assets/notification.png
 
 
 
