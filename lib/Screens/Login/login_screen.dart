@@ -1,7 +1,6 @@
+import 'package:demoproject/Screens/HomeScreen/homescreen_seller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Center(
           child: Column(
@@ -69,14 +69,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 45.0,
                   child: MaterialButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreenSeller()));
                       },
                       textColor: Colors.white,
                       color: Colors.greenAccent,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)),
                       child: const Text(
-                        "Get OTP",
+                        "Log In",
                         style: TextStyle(fontSize: 18),
                       )),
                 ),
