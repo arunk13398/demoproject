@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Screens/HomeScreen/catogory_item_page.dart';
+import 'Screens/HomeScreen/catogory_search.dart';
 import 'Screens/splash_screen.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const SplashScreen(),
-      home: const CatogoryHomePage(),
+      // home: const CatogoryHomePage(),
+      home: const CatogorySearch(),
 
     );
   }
