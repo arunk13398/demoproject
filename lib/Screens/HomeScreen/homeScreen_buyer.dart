@@ -90,11 +90,11 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                         height: 12,
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 15),
-                        child: SearchBox(onSubmit: (str) {}, hint: "Search..."),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       horizontal: 8.0, vertical: 15),
+                      //   child: SearchBox(onSubmit: (str) {}, hint: "Search..."),
+                      // ),
                       // Row(
                       //   mainAxisSize: MainAxisSize.max,
                       //   children: [
@@ -158,6 +158,7 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
+
                                     ),
                                     itemBuilder:
                                         (BuildContext context, int index) {
@@ -177,6 +178,51 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                     child: CircularProgressIndicator());
                               }),
                         ),
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 10,),
+                          Expanded(
+                            flex: 4,
+                            child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomeScreenSeller()));
+                                },
+                                textColor: Colors.white,
+                                color: Colors.orangeAccent,
+
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: const Text(
+                                  "Active Deals",
+                                  style: TextStyle(fontSize: 18),
+                                )),
+                          ),
+                          Spacer(),
+                          Expanded(
+                            flex: 4,
+                            child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomeScreenSeller()));
+                                },
+                                textColor: Colors.white,
+                                color: Colors.orangeAccent,
+
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: const Text(
+                                  "Rate Seller",
+                                  style: TextStyle(fontSize: 18),
+                                )),
+                          ),
+                          SizedBox(width: 10,),
+                        ],
                       ),
                       Padding(
                         padding:

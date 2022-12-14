@@ -63,6 +63,10 @@ flutter:
     - assets/product.png
     - assets/notification.png
     - assets/poster.jpg
+    - assets/hotels.jpg
+    - assets/hotel.png
+    - assets/hotels2.jpg
+    - assets/star.png
 
 
 
