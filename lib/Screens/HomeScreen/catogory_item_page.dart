@@ -4,15 +4,23 @@ import 'package:flutter/material.dart';
 import '../../Theme/theme.dart';
 
 class CatogoryHomePage extends StatefulWidget {
-  const CatogoryHomePage({Key? key}) : super(key: key);
+
+   const CatogoryHomePage({Key? key}) : super(key: key);
 
   @override
   State<CatogoryHomePage> createState() => _CatogoryHomePageState();
+
 }
 
 class _CatogoryHomePageState extends State<CatogoryHomePage> {
+  var orientation, size,height,width;
   @override
   Widget build(BuildContext context) {
+
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
+    
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -159,48 +167,60 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                     ),
                                   ),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Renova Goa Resort and Spa",style: TextStyle(
-                                      fontSize: 18,fontWeight: FontWeight.bold
-                                    ),),SizedBox(height: 5,),
-                                    Image(
-                                      image: AssetImage('assets/star.png'),
-                                      height: 19.0,
-                                    ),
-                                   Row(
-                                     children: [
-                                       Icon(
-                                         Icons.location_on_sharp,
-                                         size: 25,
-                                         color: Colors.grey,
-                                       ),
-                                       Text("Bangaure",style: TextStyle(fontSize: 18),),
+                                SizedBox(
+                                  width: width/2.1,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Renova Goa Resort and Spa jhbahjbs jhdd hvsvdh",style: TextStyle(
+                                          fontSize: 17,fontWeight: FontWeight.bold
+                                      ),softWrap: false,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,),
+                                      SizedBox(height: 5,),
+                                      Image(
+                                        image: AssetImage('assets/star.png'),
+                                        height: 19.0,
+                                      ),
+                                     Row(
+                                       children: [
+                                         Icon(
+                                           Icons.location_on_sharp,
+                                           size: 25,
+                                           color: Colors.grey,
+                                         ),
+                                         Text("Banglure",style: TextStyle(fontSize: 18),),
 
-                                     ],
-                                   ),
-                                    SizedBox(height: 5,),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.green,
-                                              borderRadius: BorderRadius.circular(60)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(left:15.0,right: 15,top: 5,bottom: 5),
-                                            child: Text("5.2",style: TextStyle(color:Colors.white,fontSize: 16),),
-                                          ),
-                                        ),
-                                        Row(
+                                       ],
+                                     ),
+                                      SizedBox(height: 5,),
+                                      SizedBox(
+                                        width: width/2,
+                                        child: Row(
                                           children: [
-                                            Text("Very good",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                                            Text("(320 reviews)",style: TextStyle(fontSize: 16,),),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                  borderRadius: BorderRadius.circular(60)),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left:10.0,right: 10,top: 2,bottom: 2),
+                                                child: Text("5.2",style: TextStyle(color:Colors.white,fontSize: 16),),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: width/2.7,
+                                              child: Text("Very good"+"(320 reviews)",
+                                                style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                                                softWrap: false,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
                                           ],
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -213,9 +233,14 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("Luxe International",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                                        Text("Dubai,Maldives,Tailand",style: TextStyle(fontSize: 15,),),
-                                        Text("more...",style: TextStyle(fontSize: 15,),),
+                                        Text("Luxe International ",
+                                          style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),softWrap: false,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,),
+                                        Text("Dubai,Maldives,Tailand",style: TextStyle(fontSize: 15,),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,),
+                                        SizedBox(height: 3,),
                                        Container(
                                          height: 20,
                                          decoration: BoxDecoration(
@@ -225,7 +250,8 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                            padding: const EdgeInsets.only(left:8.0,right:8,top: 3,bottom: 3),
                                            child: Text("Book Now",style: TextStyle(fontSize: 16,),),
                                          ),
-                                       )
+                                       ),
+                                        SizedBox(height: 5,)
                                       ],
                                     ),
                                   ),
@@ -299,6 +325,8 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                               ),
                               child: Container(
                                 height: 170,
+                                width: 160,
+
                                 child: Column(
                                   children: [
                                     Container(
@@ -317,8 +345,22 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top:10.0),
-                                      child: Text("Catogory 1",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                      padding: const EdgeInsets.only(top:5.0,left: 3,right: 3),
+                                      child: Text("Golden villa resort",
+                                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:3,right: 3),
+                                      child: Text("munnar",
+                                        style: TextStyle(fontSize: 16,),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -333,6 +375,8 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                               ),
                               child: Container(
                                 height: 170,
+                                width: 160,
+
                                 child: Column(
                                   children: [
                                     Container(
@@ -344,21 +388,36 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                           topLeft: Radius.circular(15),
                                         ),
                                         image: DecorationImage(
-                                          image: AssetImage('assets/hotel.png'),
+                                          image: AssetImage('assets/hotel.jpg'),
                                           fit: BoxFit.fill,
                                         ),
                                         color: MyColors.myGreyMid2,
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top:10.0),
-                                      child: Text("Catogory 1",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                      padding: const EdgeInsets.only(top:5.0,left: 3,right: 3),
+                                      child: Text("Golden villa resort",
+                                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:3,right: 3),
+                                      child: Text("munnar",
+                                        style: TextStyle(fontSize: 16,),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     )
                                   ],
                                 ),
                               ),
                             ),
                           ),
+
 
                         ],
                       ),
@@ -373,40 +432,8 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                               ),
                               child: Container(
                                 height: 170,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 160,
-                                      height: 130,
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(15),
-                                          topLeft: Radius.circular(15),
-                                        ),
-                                        image: DecorationImage(
-                                          image: AssetImage('assets/hotels.jpg'),
-                                          fit: BoxFit.fill,
-                                        ),
-                                        color: MyColors.myGreyMid2,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top:10.0),
-                                      child: Text("Catogory 1",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Card(elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Container(
-                                height: 170,
+                                width: 160,
+
                                 child: Column(
                                   children: [
                                     Container(
@@ -425,14 +452,79 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top:10.0),
-                                      child: Text("Catogory 1",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                      padding: const EdgeInsets.only(top:5.0,left: 3,right: 3),
+                                      child: Text("Golden villa resort",
+                                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:3,right: 3),
+                                      child: Text("munnar",
+                                        style: TextStyle(fontSize: 16,),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     )
                                   ],
                                 ),
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Card(elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Container(
+                                height: 170,
+                                width: 160,
+
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 160,
+                                      height: 130,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(15),
+                                          topLeft: Radius.circular(15),
+                                        ),
+                                        image: DecorationImage(
+                                          image: AssetImage('assets/hotels.jpg'),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        color: MyColors.myGreyMid2,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top:5.0,left: 3,right: 3),
+                                      child: Text("Golden villa resort",
+                                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:3,right: 3),
+                                      child: Text("munnar",
+                                        style: TextStyle(fontSize: 16,),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+
 
                         ],
                       ),
