@@ -8,7 +8,9 @@ import 'Screens/HomeScreen/homeScreen_buyer.dart';
 
 GetIt getIt = GetIt.instance;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
   runApp(const MyApp());
 }
 

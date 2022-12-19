@@ -149,44 +149,64 @@ class _CategorySearchState extends State<CategorySearch> {
                               )),
                           Row(
                             children: [
-                              SizedBox(
-                                width: 15,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Container(
+                                  width: width / 3.5,
+                                  child: MaterialButton(
+                                      onPressed: () {
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) => HomeScreenSeller()));
+                                      },
+                                      textColor: Colors.white,
+                                      color: Colors.grey,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0)),
+                                      child: SizedBox(
+                                        width: width / 5,
+                                        child: Text(
+                                          "Book Hotel",
+                                          style: TextStyle(fontSize: 18),
+                                          softWrap: false,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      )),
+                                ),
                               ),
-                              MaterialButton(
-                                  onPressed: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => HomeScreenSeller()));
-                                  },
-                                  textColor: Colors.white,
-                                  color: Colors.grey,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Text(
-                                    "Book Hotel",
-                                    style: TextStyle(fontSize: 18),
-                                  )),
-                              SizedBox(
-                                width: 15,
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Container(
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) => HomeScreenSeller()));
+                                    },
+                                    textColor: Colors.white,
+                                    color: Colors.grey,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    child: SizedBox(
+                                      width: width / 4,
+                                      child: Text(
+                                        "Book Cab",
+                                        style: TextStyle(fontSize: 18),
+                                        softWrap: false,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                  width: width / 3.5,
+                                ),
                               ),
-                              MaterialButton(
-                                  onPressed: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => HomeScreenSeller()));
-                                  },
-                                  textColor: Colors.white,
-                                  color: Colors.grey,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Text(
-                                    "Book Cab",
-                                    style: TextStyle(fontSize: 18),
-                                  )),
                             ],
                           )
                         ],
