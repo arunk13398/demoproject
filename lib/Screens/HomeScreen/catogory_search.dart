@@ -31,6 +31,8 @@ class _CategorySearchState extends State<CategorySearch> {
   }
 
   void init() {
+    _productService.setCurrentCategory = widget.category;
+    _productService.init();
     _productScrollController = TrackingScrollController();
     _productScrollController.addListener(() {
       if (_productScrollController.position.maxScrollExtent ==
@@ -223,6 +225,7 @@ class _CategorySearchState extends State<CategorySearch> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => CatogoryHomePage(
+                                            product: value.elementAt(index),
                                             category: widget.category,
                                           ))),
                               child: productWidget(index <= value.length

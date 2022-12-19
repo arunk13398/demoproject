@@ -35,6 +35,8 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
   }
 
   void init() {
+    _productService.setCurrentCategory = widget.category;
+    _productService.init();
     _productScrollController = TrackingScrollController();
     _productScrollController.addListener(() {
       if (_productScrollController.position.maxScrollExtent ==
@@ -307,7 +309,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Luxe International ",
+                                            selected?.name ?? "",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
@@ -443,9 +445,16 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                   crossAxisCount: 2,
                                 ),
                                 itemBuilder: (BuildContext context, int index) {
-                                  return productWidget(index <= value.length
-                                      ? value.elementAt(index)
-                                      : null);
+                                  return GestureDetector(
+                                    onTap: () => setState(() {
+                                      if (index <= value.length) {
+                                        selected = value.elementAt(index);
+                                      }
+                                    }),
+                                    child: productWidget(index <= value.length
+                                        ? value.elementAt(index)
+                                        : null),
+                                  );
                                 },
                               ),
                             )),
