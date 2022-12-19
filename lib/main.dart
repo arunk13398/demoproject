@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import 'Screens/HomeScreen/homeScreen_buyer.dart';
+import 'Screens/HomeScreen/qr_geration_page.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         // home: const SplashScreen(),
         // home: const CatogoryHomePage(),
         // home: const CatogorySearch(),
-        home: HomeScreenBuyer());
+        home: QrGenerationPage());
     // home: BookingPage());
   }
 }

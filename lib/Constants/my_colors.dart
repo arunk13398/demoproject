@@ -8,3 +8,4 @@ const myGreyMid = Color(0xffd4d4d4);
 const myGreyMid2 = Color(0xffDCEFED);
 const myGreyMid3 = Color(0xffC3C7C6);
 const myBlack = Color(0xFF000000);
+const myGreyMid4 = Color(0xffE4F2F8);
