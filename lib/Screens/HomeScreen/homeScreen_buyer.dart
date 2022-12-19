@@ -1,13 +1,12 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:demoproject/Screens/HomeScreen/catogory_search.dart';
 import 'package:demoproject/Screens/HomeScreen/homescreen_seller.dart';
 import 'package:demoproject/Theme/theme.dart';
+import 'package:demoproject/main.dart';
 import 'package:demoproject/model/Category.dart';
-import 'package:demoproject/widgets/search.dart';
+import 'package:demoproject/service/category_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class HomeScreenBuyer extends StatefulWidget {
   const HomeScreenBuyer({Key? key}) : super(key: key);
@@ -17,6 +16,29 @@ class HomeScreenBuyer extends StatefulWidget {
 }
 
 class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
+  late ScrollController _categoryScrollController;
+  late CategoryService _categoryService;
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  void init() {
+    _categoryService = getIt.get<CategoryService>();
+    _categoryService.init();
+    _categoryScrollController = TrackingScrollController();
+    _categoryScrollController.addListener(() {
+      if (_categoryScrollController.position.maxScrollExtent ==
+          _categoryScrollController.position.pixels) {
+        if (!_categoryService.isLoading.value) {
+          _categoryService.next();
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,54 +156,38 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                             borderRadius: BorderRadius.circular(20)),
                         color: Colors.white70,
                         child: Container(
-                          height: 365,
-                          decoration: BoxDecoration(
-                              //color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: FutureBuilder<List<Category>>(
-                              future: getData(),
-                              builder: (context, data) {
-                                if (data.hasError) {
-                                  return const Center(
-                                      child: Text(
-                                    "Something went Wrong!",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ));
-                                }
-                                if (data.hasData) {
-                                  return GridView.builder(
-                                    itemCount: data.data?.length ?? 0,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-
-                                    ),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return category(
-                                          title: data.data
-                                                  ?.elementAt(index)
-                                                  .name ??
-                                              "",
-                                          asset: data.data
-                                                  ?.elementAt(index)
-                                                  .image ??
-                                              "");
-                                    },
-                                  );
-                                }
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              }),
-                        ),
+                            height: 365,
+                            decoration: BoxDecoration(
+                                //color: Colors.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: ValueListenableBuilder(
+                              valueListenable: _categoryService.categories,
+                              builder: (BuildContext context, value,
+                                      Widget? child) =>
+                                  GridView.builder(
+                                controller: _categoryScrollController,
+                                itemCount: value.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                ),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return category(
+                                      category: index <= value.length
+                                          ? value.elementAt(index)
+                                          : null,
+                                      context: context);
+                                },
+                              ),
+                            )),
                       ),
                       Row(
                         children: [
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Expanded(
                             flex: 4,
                             child: MaterialButton(
@@ -189,11 +195,11 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomeScreenSeller()));
+                                          builder: (context) =>
+                                              HomeScreenSeller()));
                                 },
                                 textColor: Colors.white,
                                 color: Colors.orangeAccent,
-
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0)),
                                 child: const Text(
@@ -209,11 +215,11 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomeScreenSeller()));
+                                          builder: (context) =>
+                                              HomeScreenSeller()));
                                 },
                                 textColor: Colors.white,
                                 color: Colors.orangeAccent,
-
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0)),
                                 child: const Text(
@@ -221,7 +227,9 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                   style: TextStyle(fontSize: 18),
                                 )),
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                         ],
                       ),
                       Padding(
@@ -273,47 +281,43 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
     );
   }
 
-  Future<List<Category>> getData() async {
-    var _token = "974f7eb4bef311044b8b32a678705b3253e456a4";
-    var response = await http.get(
-        Uri.http("ec2-65-2-175-57.ap-south-1.compute.amazonaws.com:8001",
-            "api/v1/product-categories"),
-        headers: {
-          "Authorization": "Token 974f7eb4bef311044b8b32a678705b3253e456a4"
-        });
-    print("status code ${response.statusCode}");
-    if (response.statusCode != 200) throw Exception();
-    var data = json.decode(response.body);
-    return (data['results'] as List).map((e) => Category.fromjson(e)).toList();
-  }
-
-  Widget category({required String title, required String asset}) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: 100,
-            width: 100,
-            child: CachedNetworkImage(
-              imageUrl: asset,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  Container(
-                      child: CircularProgressIndicator(
-                          value: downloadProgress.progress)),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+  Widget category(
+      {required Category? category, required BuildContext context}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CategorySearch(category!)));
+      },
+      child: Container(
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              child: CachedNetworkImage(
+                imageUrl: category?.image ??
+                    "https://cdn-icons-png.flaticon.com/512/660/660590.png",
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Container(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress)),
+                errorWidget: (context, url, error) => Image.asset(
+                  "assets/image.png",
+                ),
+              ),
             ),
-          ),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          )
-        ],
+            Text(
+              category?.name ?? "",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
       ),
     );
   }

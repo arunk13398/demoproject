@@ -1,13 +1,17 @@
-class Category {
+import 'package:demoproject/model/Category.dart';
+
+class Product {
+  int? _id;
   String? _name;
   String? _image;
-  int? _id;
+  Category _category;
 
   int get id => _id ?? 0;
   String get name => _name ?? "";
   String get image => _image ?? "";
+  Category get category => _category;
 
-  Category.fromjson(Map<String, dynamic> data) {
+  Product.fromJson(Map data, this._category) {
     _id = data['id'];
     _name = data['name'];
     _image = data['image'];

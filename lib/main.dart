@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'Screens/HomeScreen/booking_page.dart';
 import 'Screens/HomeScreen/catogory_item_page.dart';
 import 'Screens/HomeScreen/catogory_search.dart';
 import 'Screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+Future<void> init() async {
+  getIt.registerSingleton(HttpService());
+  await getIt.get<HttpService>().init();
+  getIt.registerLazySingleton<CategoryService>(() => CategoryService());
+  getIt.registerLazySingleton<ProductService>(() => ProductService());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,15 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: const SplashScreen(),
-      // home: const CatogoryHomePage(),
-      // home: const CatogorySearch(),
-      home: const BookingPage(),
-
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        // home: const SplashScreen(),
+        // home: const CatogoryHomePage(),
+        // home: const CatogorySearch(),
+        home: HomeScreenBuyer());
   }
 }
