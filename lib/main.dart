@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Screens/HomeScreen/booking_page.dart';
 import 'Screens/HomeScreen/catogory_item_page.dart';
 import 'Screens/HomeScreen/catogory_search.dart';
 import 'Screens/splash_screen.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: const SplashScreen(),
       // home: const CatogoryHomePage(),
-      home: const CatogorySearch(),
+      // home: const CatogorySearch(),
+      home: const BookingPage(),
 
     );
   }

@@ -64,6 +64,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                 Container(
                   child: Row(
                     children: [
+
                       SizedBox(width: 10),
                       Expanded(
                         flex: 3,
