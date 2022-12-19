@@ -171,7 +171,7 @@ class _CategorySearchState extends State<CategorySearch> {
                                           "Book Hotel",
                                           style: TextStyle(fontSize: 18),
                                           softWrap: false,
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       )),
@@ -219,42 +219,42 @@ class _CategorySearchState extends State<CategorySearch> {
                     style:
                         TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  color: Colors.white70,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: ValueListenableBuilder(
-                        valueListenable: _productService.products,
-                        builder: (BuildContext context, value, Widget? child) =>
-                            GridView.builder(
-                          controller: _productScrollController,
-                          itemCount: value.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                          ),
-                          itemBuilder: (BuildContext context, int index) {
-                            return GestureDetector(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CatogoryHomePage(
-                                            product: value.elementAt(index),
-                                            category: widget.category,
-                                          ))),
-                              child: productWidget(index <= value.length
-                                  ? value.elementAt(index)
-                                  : null),
-                            );
-                          },
-                        ),
-                      )),
+                // Card(
+                //   shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(20)),
+                //   color: Colors.white70,
+                //   child: Container(
+                //       decoration: BoxDecoration(
+                //           //color: Colors.white,
+                //           borderRadius: BorderRadius.circular(20)),
+                //       child:
+                ValueListenableBuilder(
+                  valueListenable: _productService.products,
+                  builder: (BuildContext context, value, Widget? child) =>
+                      GridView.builder(
+                    controller: _productScrollController,
+                    itemCount: value.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CatogoryHomePage(
+                                      product: value.elementAt(index),
+                                      category: widget.category,
+                                    ))),
+                        child: productWidget(index <= value.length
+                            ? value.elementAt(index)
+                            : null),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -265,64 +265,62 @@ class _CategorySearchState extends State<CategorySearch> {
   }
 
   Widget productWidget(Product? product) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Container(
-          height: 170,
-          width: 160,
-          child: Column(
-            children: [
-              Container(
-                width: 160,
-                height: 130,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(15),
-                    topLeft: Radius.circular(15),
-                  ),
-                  color: MyColors.myGreyMid2,
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: product?.image ??
-                      "https://cdn-icons-png.flaticon.com/512/660/660590.png",
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Container(
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
-                  errorWidget: (context, url, error) =>
-                      Image.asset("assets/image.png"),
-                ),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
+            ),
+            child: Container(
+              width: 180,
+              height: 130,
+              decoration: const BoxDecoration(
+                // borderRadius: BorderRadius.only(
+                //   topRight: Radius.circular(15),
+                //   topLeft: Radius.circular(15),
+                // ),
+                color: Colors.white,
+                // color: MyColors.myGreyMid2,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0, left: 3, right: 3),
-                child: Text(
-                  product?.name ?? "",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  softWrap: false,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              child: CachedNetworkImage(
+                imageUrl: product?.image ??
+                    "https://cdn-icons-png.flaticon.com/512/660/660590.png",
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Container(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress)),
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/image.png"),
+                fit: BoxFit.fill,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 3, right: 3),
-                child: Text(
-                  "munnar",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                  softWrap: false,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 2.0, left: 3, right: 3),
+            child: Text(
+              product?.name ?? "",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 3, right: 3),
+            child: Text(
+              "munnar",
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
+        ],
       ),
     );
   }

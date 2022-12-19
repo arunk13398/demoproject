@@ -7,6 +7,7 @@ import '../../main.dart';
 import '../../model/Category.dart';
 import '../../model/product.dart';
 import '../../service/product_service.dart';
+import 'booking_page.dart';
 
 class CatogoryHomePage extends StatefulWidget {
   Product? product;
@@ -102,7 +103,6 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                 Container(
                   child: Row(
                     children: [
-
                       SizedBox(width: 10),
                       Expanded(
                         flex: 3,
@@ -211,6 +211,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                                             .progress)),
                                         errorWidget: (context, url, error) =>
                                             Image.asset("assets/image.png"),
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),
@@ -278,7 +279,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: width / 2.7,
+                                                width: width / 2.8,
                                                 child: Text(
                                                   "Very good" + "(320 reviews)",
                                                   style: TextStyle(
@@ -329,22 +330,31 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                           SizedBox(
                                             height: 3,
                                           ),
-                                          Container(
-                                            height: 20,
-                                            decoration: BoxDecoration(
-                                                color: Colors.greenAccent,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0,
-                                                  right: 8,
-                                                  top: 3,
-                                                  bottom: 3),
-                                              child: Text(
-                                                "Book Now",
-                                                style: TextStyle(
-                                                  fontSize: 16,
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BookingPage()));
+                                            },
+                                            child: Container(
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.greenAccent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0,
+                                                    right: 8,
+                                                    top: 2,
+                                                    bottom: 3),
+                                                child: Text(
+                                                  "Book Now",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -424,41 +434,31 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        color: Colors.white70,
-                        child: Container(
-                            decoration: BoxDecoration(
-                                //color: Colors.white,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: ValueListenableBuilder(
-                              valueListenable: _productService.products,
-                              builder: (BuildContext context, value,
-                                      Widget? child) =>
-                                  GridView.builder(
-                                controller: _productScrollController,
-                                itemCount: value.length,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                ),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return GestureDetector(
-                                    onTap: () => setState(() {
-                                      if (index <= value.length) {
-                                        selected = value.elementAt(index);
-                                      }
-                                    }),
-                                    child: productWidget(index <= value.length
-                                        ? value.elementAt(index)
-                                        : null),
-                                  );
-                                },
-                              ),
-                            )),
+                      ValueListenableBuilder(
+                        valueListenable: _productService.products,
+                        builder: (BuildContext context, value, Widget? child) =>
+                            GridView.builder(
+                          controller: _productScrollController,
+                          itemCount: value.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () => setState(() {
+                                if (index <= value.length) {
+                                  selected = value.elementAt(index);
+                                }
+                              }),
+                              child: productWidget(index <= value.length
+                                  ? value.elementAt(index)
+                                  : null),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -472,64 +472,62 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
   }
 
   Widget productWidget(Product? product) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Container(
-          height: 170,
-          width: 160,
-          child: Column(
-            children: [
-              Container(
-                width: 160,
-                height: 130,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(15),
-                    topLeft: Radius.circular(15),
-                  ),
-                  color: MyColors.myGreyMid2,
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: product?.image ??
-                      "https://cdn-icons-png.flaticon.com/512/660/660590.png",
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Container(
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
-                  errorWidget: (context, url, error) =>
-                      Image.asset("assets/image.png"),
-                ),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
+            ),
+            child: Container(
+              width: 180,
+              height: 130,
+              decoration: const BoxDecoration(
+                // borderRadius: BorderRadius.only(
+                //   topRight: Radius.circular(15),
+                //   topLeft: Radius.circular(15),
+                // ),
+                color: Colors.white,
+                // color: MyColors.myGreyMid2,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0, left: 3, right: 3),
-                child: Text(
-                  product?.name ?? "",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  softWrap: false,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              child: CachedNetworkImage(
+                imageUrl: product?.image ??
+                    "https://cdn-icons-png.flaticon.com/512/660/660590.png",
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Container(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress)),
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/image.png"),
+                fit: BoxFit.fill,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 3, right: 3),
-                child: Text(
-                  "munnar",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                  softWrap: false,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 2.0, left: 3, right: 3),
+            child: Text(
+              product?.name ?? "",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 3, right: 3),
+            child: Text(
+              "munnar",
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
+        ],
       ),
     );
   }

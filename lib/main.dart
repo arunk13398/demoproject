@@ -36,5 +36,6 @@ class MyApp extends StatelessWidget {
         // home: const CatogoryHomePage(),
         // home: const CatogorySearch(),
         home: HomeScreenBuyer());
+    // home: BookingPage());
   }
 }
