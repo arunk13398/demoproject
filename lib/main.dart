@@ -1,8 +1,12 @@
+import 'package:demoproject/service/category_service.dart';
+import 'package:demoproject/service/http_service.dart';
+import 'package:demoproject/service/product_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-import 'Screens/HomeScreen/catogory_item_page.dart';
-import 'Screens/HomeScreen/catogory_search.dart';
-import 'Screens/splash_screen.dart';
+import 'Screens/HomeScreen/homeScreen_buyer.dart';
+
+GetIt getIt = GetIt.instance;
 
 void main() {
   runApp(const MyApp());
