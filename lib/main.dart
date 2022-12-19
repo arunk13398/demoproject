@@ -1,14 +1,10 @@
-import 'package:demoproject/Screens/HomeScreen/homeScreen_buyer.dart';
-import 'package:demoproject/service/category_service.dart';
-import 'package:demoproject/service/http_service.dart';
-import 'package:demoproject/service/product_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
-GetIt getIt = GetIt.instance;
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await init();
+import 'Screens/HomeScreen/catogory_item_page.dart';
+import 'Screens/HomeScreen/catogory_search.dart';
+import 'Screens/splash_screen.dart';
+
+void main() {
   runApp(const MyApp());
 }
 
