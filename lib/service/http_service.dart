@@ -13,7 +13,7 @@ class HttpService {
       "ec2-65-2-175-57.ap-south-1.compute.amazonaws.com:8001";
   static const String version = "/api/v1";
   static const String categoriesURL = "$version/product-categories";
-  static const String productsURL = "$version/product-types";
+  static const String productsURL = "$version/products";
   static const String loginURl = "";
 
   late SharedPreferences _prefs;

@@ -10,28 +10,28 @@ class CategoryService {
   final ValueNotifier<List<Category>> _categories =
       ValueNotifier(List<Category>.empty(growable: true));
   int _page = 1;
-  ValueNotifier<bool> _initLoading = ValueNotifier(true);
-  ValueNotifier<bool> _isLoading = ValueNotifier(false);
+  bool _initLoading = true;
+  bool _isLoading = false;
 
   CategoryService() {
     service = getIt.get<HttpService>();
   }
 
   ValueNotifier<List<Category>> get categories => _categories;
-  ValueNotifier<bool> get initLoading => _initLoading;
-  ValueNotifier<bool> get isLoading => _isLoading;
+  bool get initLoading => _initLoading;
+  bool get isLoading => _isLoading;
 
   Future<void> next() async {
     print("category page next called");
     _page++;
-    _initLoading.value = true;
+    _isLoading = true;
     await service.get(
       url: HttpService.categoriesURL,
       parameter: {"page": _page, "limit": _limit},
       onComplete: (Map data) {
+        _isLoading = false;
         _categories.value
             .addAll((data['results'] as List).map((e) => Category.fromjson(e)));
-        _initLoading.value = false;
         _categories.notifyListeners();
       },
     );
@@ -39,16 +39,16 @@ class CategoryService {
 
   Future<void> init() async {
     print("categories init called");
-    _isLoading.value = true;
+    _initLoading = true;
     _page = 1;
     await service.get(
       url: HttpService.categoriesURL,
       parameter: {"page": _page, "limit": _limit},
       onComplete: (Map data) {
+        _initLoading = false;
         _categories.value.clear();
         _categories.value
             .addAll((data['results'] as List).map((e) => Category.fromjson(e)));
-        _isLoading.value = false;
         _categories.notifyListeners();
       },
     );

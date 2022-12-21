@@ -4,8 +4,7 @@ import 'package:demoproject/service/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import 'Screens/HomeScreen/homeScreen_buyer.dart';
-import 'Screens/HomeScreen/qr_geration_page.dart';
+import 'Screens/splash_screen.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -29,14 +28,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        // home: const SplashScreen(),
-        // home: const CatogoryHomePage(),
-        // home: const CatogorySearch(),
-        home: QrGenerationPage());
-    // home: BookingPage());
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const SplashScreen(),
+      // home: const CatogoryHomePage(),
+      // home: const CatogorySearch(),
+      // home: HomeScreenBuyer(),
+    );
   }
 }

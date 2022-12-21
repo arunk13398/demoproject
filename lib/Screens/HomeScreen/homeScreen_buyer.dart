@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demoproject/Screens/HomeScreen/catogory_search.dart';
 import 'package:demoproject/Screens/HomeScreen/homescreen_seller.dart';
+import 'package:demoproject/Screens/HomeScreen/shimmer.dart';
 import 'package:demoproject/Theme/theme.dart';
 import 'package:demoproject/main.dart';
 import 'package:demoproject/model/Category.dart';
@@ -32,7 +33,7 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
     _categoryScrollController.addListener(() {
       if (_categoryScrollController.position.maxScrollExtent ==
           _categoryScrollController.position.pixels) {
-        if (!_categoryService.isLoading.value) {
+        if (!_categoryService.isLoading) {
           _categoryService.next();
         }
       }
@@ -166,7 +167,9 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                       Widget? child) =>
                                   GridView.builder(
                                 controller: _categoryScrollController,
-                                itemCount: value.length,
+                                itemCount: _categoryService.initLoading
+                                    ? 4
+                                    : value.length,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
                                 gridDelegate:
@@ -174,11 +177,11 @@ class _HomeScreenBuyerState extends State<HomeScreenBuyer> {
                                   crossAxisCount: 2,
                                 ),
                                 itemBuilder: (BuildContext context, int index) {
-                                  return category(
-                                      category: index <= value.length
-                                          ? value.elementAt(index)
-                                          : null,
-                                      context: context);
+                                  return index < value.length
+                                      ? category(
+                                          category: value.elementAt(index),
+                                          context: context)
+                                      : getCategoryShimmer();
                                 },
                               ),
                             )),

@@ -12,8 +12,8 @@ class ProductService extends ChangeNotifier {
       ValueNotifier(List<Product>.empty(growable: true));
   int _page = 0;
   static const int _limit = 10;
-  ValueNotifier<bool> _initLoading = ValueNotifier(true);
-  ValueNotifier<bool> _isLoading = ValueNotifier(false);
+  bool _initLoading = true;
+  bool _isLoading = false;
 
   set setCurrentCategory(Category currentCategory) {
     _currentCategory = currentCategory;
@@ -26,20 +26,20 @@ class ProductService extends ChangeNotifier {
   }
 
   ValueNotifier<List<Product>> get products => _products;
-  ValueNotifier<bool> get initLoading => _initLoading;
-  ValueNotifier<bool> get isLoading => _isLoading;
+  bool get initLoading => _initLoading;
+  bool get isLoading => _isLoading;
 
   Future<void> next() async {
     print("category page next called");
     _page++;
-    _initLoading.value = true;
+    _isLoading = true;
     await service.get(
       url: HttpService.productsURL,
       parameter: {"page": _page, "limit": _limit},
       onComplete: (Map data) {
+        _isLoading = false;
         _products.value.addAll((data['results'] as List)
             .map((e) => Product.fromJson(e, currentCategory!)));
-        _initLoading.value = false;
         _products.notifyListeners();
       },
     );
@@ -47,16 +47,17 @@ class ProductService extends ChangeNotifier {
 
   Future<void> init() async {
     print("categories init called");
-    _isLoading.value = true;
+    _initLoading = true;
     _page = 1;
     await service.get(
       url: HttpService.productsURL,
       parameter: {"page": _page, "limit": _limit},
       onComplete: (Map data) {
+        _initLoading = false;
         _products.value.clear();
         _products.value.addAll((data['results'] as List)
             .map((e) => Product.fromJson(e, currentCategory!)));
-        _isLoading.value = false;
+
         _products.notifyListeners();
       },
     );

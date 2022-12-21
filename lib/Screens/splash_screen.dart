@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Constants/my_colors.dart';
+
 import '../Theme/theme.dart';
 import 'Login/login_screen.dart';
 
@@ -15,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     checkLogin(context);
@@ -24,20 +25,29 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text("Dicker Deals",
-              style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold,color: Colors.white),
+            Text(
+              "Dicker Deals",
+              style: TextStyle(
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
-            SizedBox(height: 50,),
-            CircularProgressIndicator(color: Colors.white,)
+            SizedBox(
+              height: 50,
+            ),
+            CircularProgressIndicator(
+              color: Colors.white,
+            )
           ],
         ),
       ),
     );
   }
-  checkLogin(BuildContext context)async{
-      Future.delayed(const Duration(milliseconds: 3000), () {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()));
-      });
+
+  checkLogin(BuildContext context) async {
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
+    });
   }
 }
