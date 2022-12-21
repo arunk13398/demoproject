@@ -24,7 +24,7 @@ class _CategorySearchState extends State<CategorySearch> {
   late ScrollController _productScrollController;
 
   @override
-  void initState() {
+  void initState(){
     _productService = getIt.get<ProductService>();
     init();
     super.initState();
