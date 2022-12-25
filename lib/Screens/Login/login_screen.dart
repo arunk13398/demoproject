@@ -2,6 +2,8 @@ import 'package:demoproject/Screens/HomeScreen/homescreen_seller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../HomeScreen/homeScreen_buyer.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -72,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreenSeller()));
+                                builder: (context) => HomeScreenBuyer()));
                       },
                       textColor: Colors.white,
                       color: Colors.greenAccent,

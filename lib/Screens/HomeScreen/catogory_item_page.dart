@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:demoproject/Screens/HomeScreen/shimmer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
     _productScrollController.addListener(() {
       if (_productScrollController.position.maxScrollExtent ==
           _productScrollController.position.pixels) {
-        if (!_productService.isLoading.value) {
+        if (!_productService.isLoading) {
           _productService.next();
         }
       }
@@ -200,7 +201,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                         color: MyColors.myGreyMid2,
                                       ),
                                       child: CachedNetworkImage(
-                                        imageUrl: selected?.image ??
+                                        imageUrl: "" ??
                                             "https://cdn-icons-png.flaticon.com/512/660/660590.png",
                                         progressIndicatorBuilder: (context, url,
                                                 downloadProgress) =>
@@ -439,7 +440,8 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                         builder: (BuildContext context, value, Widget? child) =>
                             GridView.builder(
                           controller: _productScrollController,
-                          itemCount: value.length,
+                          itemCount:
+                              _productService.initLoading ? 4 : value.length,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           gridDelegate:
@@ -453,9 +455,9 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                                   selected = value.elementAt(index);
                                 }
                               }),
-                              child: productWidget(index <= value.length
-                                  ? value.elementAt(index)
-                                  : null),
+                              child: index < value.length
+                                  ? productWidget(value.elementAt(index))
+                                  : getProductShimmer(),
                             );
                           },
                         ),
@@ -493,7 +495,7 @@ class _CatogoryHomePageState extends State<CatogoryHomePage> {
                 // color: MyColors.myGreyMid2,
               ),
               child: CachedNetworkImage(
-                imageUrl: product?.image ??
+                imageUrl: "" ??
                     "https://cdn-icons-png.flaticon.com/512/660/660590.png",
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Container(

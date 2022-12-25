@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demoproject/Screens/HomeScreen/catogory_item_page.dart';
+import 'package:demoproject/Screens/HomeScreen/shimmer.dart';
 import 'package:demoproject/main.dart';
 import 'package:demoproject/service/product_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,7 +38,7 @@ class _CategorySearchState extends State<CategorySearch> {
     _productScrollController.addListener(() {
       if (_productScrollController.position.maxScrollExtent ==
           _productScrollController.position.pixels) {
-        if (!_productService.isLoading.value) {
+        if (!_productService.isLoading) {
           _productService.next();
         }
       }
@@ -233,7 +234,7 @@ class _CategorySearchState extends State<CategorySearch> {
                   builder: (BuildContext context, value, Widget? child) =>
                       GridView.builder(
                     controller: _productScrollController,
-                    itemCount: value.length,
+                    itemCount: _productService.initLoading ? 4 : value.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     gridDelegate:
@@ -249,9 +250,9 @@ class _CategorySearchState extends State<CategorySearch> {
                                       product: value.elementAt(index),
                                       category: widget.category,
                                     ))),
-                        child: productWidget(index <= value.length
-                            ? value.elementAt(index)
-                            : null),
+                        child: index < value.length
+                            ? productWidget(value.elementAt(index))
+                            : getProductShimmer(),
                       );
                     },
                   ),
@@ -286,7 +287,7 @@ class _CategorySearchState extends State<CategorySearch> {
                 // color: MyColors.myGreyMid2,
               ),
               child: CachedNetworkImage(
-                imageUrl: product?.image ??
+                imageUrl: "" ??
                     "https://cdn-icons-png.flaticon.com/512/660/660590.png",
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Container(
