@@ -1,4 +1,5 @@
 import 'package:demoproject/Screens/HomeScreen/homeScreen_buyer.dart';
+import 'package:demoproject/Screens/HomeScreen/seller/quating_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -153,58 +154,66 @@ class _HomeScreenSellerState extends State<HomeScreenSeller> {
                   SizedBox(
                     height: 15,
                   ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Container(
-                      height: 80,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QuatingRequest()));
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Container(
+                        height: 80,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                width: 60,
+                                height: 60,
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                  // image:DecorationImage(
+                                  //   image: AssetImage('assets/bell.png'),
+                                  //   fit: BoxFit.cover,
+                                  // ),color: MyColors.myGreyMid2,
                                 ),
-                                // image:DecorationImage(
-                                //   image: AssetImage('assets/bell.png'),
-                                //   fit: BoxFit.cover,
-                                // ),color: MyColors.myGreyMid2,
-                              ),
-                              child: Image(
-                                image: AssetImage('assets/notification.png'),
-                                height: 250.0,
-                                width: 250.0,
+                                child: Image(
+                                  image: AssetImage('assets/notification.png'),
+                                  height: 250.0,
+                                  width: 250.0,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, top: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Active Notifications",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: MyColors.myAppbarColor),
-                                ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Text(
-                                  "Deals Notifcation: 10",
-                                  style: TextStyle(
-                                      fontSize: 16, color: MyColors.myBlack),
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0, top: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Active Notifications",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: MyColors.myAppbarColor),
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  Text(
+                                    "Deals Notifcation: 10",
+                                    style: TextStyle(
+                                        fontSize: 16, color: MyColors.myBlack),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
