@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demoproject/Screens/HomeScreen/catogory_search.dart';
-import 'package:demoproject/Screens/HomeScreen/homescreen_seller.dart';
+import 'package:demoproject/Screens/HomeScreen/seller/homescreen_seller.dart';
 import 'package:demoproject/Screens/HomeScreen/shimmer.dart';
 import 'package:demoproject/Theme/theme.dart';
 import 'package:demoproject/main.dart';

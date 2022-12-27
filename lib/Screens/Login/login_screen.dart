@@ -1,4 +1,4 @@
-import 'package:demoproject/Screens/HomeScreen/homescreen_seller.dart';
+import 'package:demoproject/Screens/HomeScreen/seller/homescreen_seller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

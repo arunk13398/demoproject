@@ -2,7 +2,8 @@ import 'package:demoproject/Screens/HomeScreen/homeScreen_buyer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../Theme/theme.dart';
+import '../../../Theme/theme.dart';
+import 'add_product.dart';
 
 class HomeScreenSeller extends StatefulWidget {
   const HomeScreenSeller({Key? key}) : super(key: key);
@@ -207,128 +208,66 @@ class _HomeScreenSellerState extends State<HomeScreenSeller> {
                       ),
                     ),
                   ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Container(
-                      height: 80,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddProduct()));
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Container(
+                        height: 80,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                width: 60,
+                                height: 60,
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                  // image:DecorationImage(
+                                  //   image: AssetImage('assets/bell.png'),
+                                  //   fit: BoxFit.cover,
+                                  // ),color: MyColors.myGreyMid2,
                                 ),
-                                // image:DecorationImage(
-                                //   image: AssetImage('assets/bell.png'),
-                                //   fit: BoxFit.cover,
-                                // ),color: MyColors.myGreyMid2,
-                              ),
-                              child: Image(
-                                image: AssetImage('assets/chats.png'),
-                                fit: BoxFit.cover,
-                                height: 250.0,
-                                width: 250.0,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, top: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Chat Notifications",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: MyColors.myAppbarColor),
+                                child: Image(
+                                  image: AssetImage('assets/product.png'),
+                                  height: 250.0,
+                                  width: 250.0,
                                 ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Total Chats : 36",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: MyColors.myBlack),
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      "New Chats: 10",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: MyColors.myBlack),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Container(
-                      height: 80,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                                // image:DecorationImage(
-                                //   image: AssetImage('assets/bell.png'),
-                                //   fit: BoxFit.cover,
-                                // ),color: MyColors.myGreyMid2,
-                              ),
-                              child: Image(
-                                image: AssetImage('assets/product.png'),
-                                height: 250.0,
-                                width: 250.0,
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, top: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Add New Product",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: MyColors.myAppbarColor),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  "Add new products/items ",
-                                  style: TextStyle(
-                                      fontSize: 16, color: MyColors.myBlack),
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0, top: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Add New Product",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: MyColors.myAppbarColor),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    "Add new products/items ",
+                                    style: TextStyle(
+                                        fontSize: 16, color: MyColors.myBlack),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

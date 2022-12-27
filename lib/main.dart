@@ -7,6 +7,8 @@ import 'package:get_it/get_it.dart';
 import 'Screens/HomeScreen/homeScreen_buyer.dart';
 import 'Screens/HomeScreen/offer_page.dart';
 import 'Screens/HomeScreen/qr_geration_page.dart';
+import 'Screens/HomeScreen/seller/add_product.dart';
+import 'Screens/HomeScreen/seller/homescreen_seller.dart';
 import 'Screens/splash_screen.dart';
 import 'Screens/splash_screen.dart';
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const SplashScreen(),
-      home: const OfferPage(),
+      home: const HomeScreenSeller(),
       // home: const CatogoryHomePage(),
       // home: const CatogorySearch(),
       // home: HomeScreenBuyer(),
