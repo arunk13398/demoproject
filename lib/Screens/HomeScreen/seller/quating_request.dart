@@ -224,8 +224,8 @@ class Card1 extends StatelessWidget {
                       return Padding(
                         padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                         child: Expandable(
-                          collapsed: collapsed,
-                          expanded: expanded,
+                          collapsed: expanded,
+                          expanded: collapsed,
                           theme: const ExpandableThemeData(crossFadePoint: 0),
                         ),
                       );
